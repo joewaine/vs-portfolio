@@ -1,0 +1,6 @@
+<%- include('_head', { title: 'keybindings.json', page: 'keybindings' }) %>
+<h1>keybindings.json</h1>
+<p class="fine">The keyboard shortcuts of the JavaScript version of this site, in VS Code's keybindings format. They need JavaScript, so none of them work on this plain page.</p>
+<pre><% lines.forEach(function (line) { %><%= line.map(function (t) { return t[1]; }).join('') %>
+<% }); %></pre>
+<%- include('_foot') %>

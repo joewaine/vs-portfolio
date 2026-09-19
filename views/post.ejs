@@ -1,0 +1,19 @@
+<%- include('layout', { body: `
+  <article class="content post">
+    <header class="post-header">
+      <h1>${post.title}</h1>
+      <time datetime="${post.date}">// ${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+      ${post.tags && post.tags.length > 0 ? `
+        <div class="post-tags">
+          ${post.tags.map(tag => `<a href="/blog?tag=${tag}" class="post-tag">#${tag}</a>`).join('')}
+        </div>
+      ` : ''}
+    </header>
+    <div class="post-content">
+      ${post.content}
+    </div>
+    <footer class="post-footer">
+      <a href="/blog">← cd ../blog</a>
+    </footer>
+  </article>
+` }) %>

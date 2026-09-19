@@ -1,0 +1,20 @@
+<%- include('_head', { title: 'Contact', page: 'contact' }) %>
+<h1>Contact</h1>
+<p class="lead"><%= contact.message %></p>
+
+<h2>Email</h2>
+<p><a href="mailto:<%= contact.email %>"><%= contact.email %></a></p>
+
+<h2>Elsewhere</h2>
+<ul>
+<% const social = [
+     ['GitHub', contact.social.github],
+     ['LinkedIn', contact.social.linkedin],
+     ['X/Twitter', contact.social.twitter],
+     ['YouTube', contact.social.youtube],
+     ['Bandcamp', contact.social.bandcamp],
+   ]; %>
+<% social.forEach(function (item) { if (!item[1]) return; %><li><a href="<%= item[1] %>" rel="noopener"><%= item[0] %></a></li>
+<% }); %>
+</ul>
+<%- include('_foot') %>

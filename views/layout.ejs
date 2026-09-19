@@ -1,0 +1,112 @@
+<%
+  // Everything in the window chrome comes from content/site.json — see README.
+  // `tabs` is the flat list of explorer files, in explorer order.
+  const tabs = (site.explorer || []).flatMap((folder) => folder.files || []);
+%><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <title><%= typeof title !== 'undefined' && title ? title + ' - ' + site.name : site.name %></title>
+  <% if (typeof meta !== 'undefined' && meta) { %>
+  <meta name="description" content="<%= meta.description %>">
+  <meta property="og:title" content="<%= meta.title %>">
+  <meta property="og:description" content="<%= meta.description %>">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<%= meta.url %>">
+  <meta property="og:image" content="<%= meta.image %>">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= meta.title %>">
+  <meta name="twitter:description" content="<%= meta.description %>">
+  <meta name="twitter:image" content="<%= meta.image %>">
+  <% } %>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="<%= typeof page !== 'undefined' && page ? 'page-' + page : '' %>">
+  <!-- Title Bar -->
+  <div class="titlebar">
+    <div class="titlebar-controls">
+      <span class="titlebar-btn close"></span>
+      <span class="titlebar-btn minimize"></span>
+      <span class="titlebar-btn maximize"></span>
+    </div>
+    <div class="titlebar-title"><%= site.titlebar %></div>
+  </div>
+
+  <!-- Tabs Bar -->
+  <div class="tabs-bar">
+    <% tabs.forEach(function (file) { %>
+    <a href="<%= file.url %>" class="tab <%= page === file.page ? 'active' : '' %>"<%= file.defaultClosed ? ' data-default-closed' : '' %>>
+      <span class="tab-icon"><%= file.tabIcon || '🔷' %></span>
+      <%= file.label %>
+      <span class="tab-close">×</span>
+    </a>
+    <% }); %>
+  </div>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    <!-- Activity Bar -->
+    <div class="activity-bar">
+      <a href="/" class="activity-item <%= page === 'home' ? 'active' : '' %>" title="Explorer">
+        <span class="activity-icon">☰</span>
+      </a>
+      <a href="/blog" class="activity-item <%= page === 'blog' ? 'active' : '' %>" title="Search">
+        <span class="activity-icon">⌕</span>
+      </a>
+      <a href="/contact" class="activity-item <%= page === 'contact' ? 'active' : '' %>" title="Source Control">
+        <span class="activity-icon">⎇</span>
+      </a>
+      <a href="<%= adminEnabled ? '/admin' : '/keybindings' %>" class="activity-item <%= page === 'admin' ? 'active' : '' %>" title="Settings">
+        <span class="activity-icon">⚙</span>
+      </a>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-content">
+        <% (site.explorer || []).forEach(function (folder) { %>
+        <div class="folder">
+          <div class="folder-header">
+            <span class="folder-icon"><%= folder.open === false ? '▶' : '▼' %></span>
+            <span class="folder-name"><%= folder.folder %></span>
+          </div>
+          <% if (folder.files && folder.files.length) { %>
+          <ul class="file-list">
+            <% folder.files.forEach(function (file) { %>
+            <li><a href="<%= file.url %>" class="file-item <%= page === file.page ? 'active' : '' %>"<%- file.external ? ' target="_blank" rel="noopener"' : '' %>><span class="file-icon <%= file.icon || '' %>"><%= { js: 'JS', md: 'M↓', json: '{}', py: 'PY', sh: '$' }[file.icon] || file.glyph || '•' %></span> <%= file.label %></a></li>
+            <% }); %>
+          </ul>
+          <% } %>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+      <div class="editor-content">
+        <%- body %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="statusbar">
+    <div class="statusbar-left">
+      <span class="statusbar-item">⎇ <%= site.statusbar.branch %></span>
+      <span class="statusbar-item statusbar-problems">↻ 0 ⚠ 0</span>
+    </div>
+    <div class="statusbar-right">
+      <a class="statusbar-item statusbar-link" href="<%= typeof dilloUrl !== 'undefined' ? dilloUrl : '/?lite=1' %>" title="Plain HTML, no JavaScript — renders in Dillo">plain version</a>
+      <span class="statusbar-item statusbar-position">Ln 1, Col 1</span>
+      <span class="statusbar-item"><%= site.statusbar.encoding %></span>
+      <span class="statusbar-item"><%= site.statusbar.language %></span>
+    </div>
+  </div>
+
+  <script src="/js/edit.js" defer></script>
+</body>
+</html>

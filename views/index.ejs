@@ -1,0 +1,29 @@
+<%- include('layout', { body: `
+  <section class="hero">
+    <div class="hero-intro">
+      ${site.photo ? `<img src="${site.photo}" alt="${site.name}" class="hero-photo">` : ''}
+      <div class="hero-text">
+        <h1>${site.greeting}</h1>
+        <p class="hero-subtitle">${site.tagline}</p>
+      </div>
+    </div>
+    <div class="hero-links">
+      ${site.heroLinks.map(l => `<a href="${l.url}" class="btn${l.outline ? ' btn-outline' : ''}">${l.label}</a>`).join('')}
+    </div>
+    <div class="hero-social">
+      ${site.social.map(s => `<a href="${s.url}"${s.external ? ' target="_blank" rel="noopener"' : ''}>${s.label}</a>`).join('')}
+      ${site.email ? `<a href="mailto:${site.email}">${site.email}</a>` : ''}
+    </div>
+  </section>
+
+  <section class="content projects-section">
+    <h2>## Projects</h2>
+    <div class="posts-list">
+      ${projects.map(p => `
+      <div class="post-preview">
+        <h2><a href="${p.url}"${p.external ? ' target="_blank" rel="noopener"' : ''}>${p.title}${p.external ? ' 🔗' : ''}</a></h2>
+        <p>${p.description}</p>
+      </div>`).join('')}
+    </div>
+  </section>
+` }) %>

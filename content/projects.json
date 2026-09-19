@@ -1,0 +1,13 @@
+[
+  {
+    "title": "A thing you built",
+    "description": "One or two sentences on what it is and why it exists. Links can be internal or external.",
+    "url": "/blog/hello-world"
+  },
+  {
+    "title": "Something on someone else's site",
+    "description": "Set \"external\": true and it opens in a new tab with a link glyph.",
+    "url": "https://example.com",
+    "external": true
+  }
+]

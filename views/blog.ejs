@@ -1,0 +1,30 @@
+<%- include('layout', { body: `
+  <section class="content">
+    <h1>{ "posts": [...] }</h1>
+
+    <div class="blog-filters">
+      <span class="filter-label">// filter by tag:</span>
+      <a href="/blog" class="tag-filter ${!currentTag ? 'active' : ''}">all</a>
+      ${allTags.map(tag => `
+        <a href="/blog?tag=${tag}" class="tag-filter ${currentTag === tag ? 'active' : ''}">${tag}</a>
+      `).join('')}
+    </div>
+
+    <div class="posts-list">
+      ${posts.length === 0 ? '<p>// No posts found.</p>' : posts.map(post => `
+        <article class="post-preview">
+          <h2><a href="/blog/${post.id}">${post.title}</a></h2>
+          <time datetime="${post.date}">// ${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          ${post.tags && post.tags.length > 0 ? `
+            <div class="post-tags">
+              ${post.tags.map(tag => `<a href="/blog?tag=${tag}" class="post-tag">#${tag}</a>`).join('')}
+            </div>
+          ` : ''}
+          <p>${post.excerpt}</p>
+        </article>
+      `).join('')}
+    </div>
+
+    ${adminEnabled ? '<a href="/admin" class="quick-post-btn" title="New Post">+</a>' : ''}
+  </section>
+` }) %>

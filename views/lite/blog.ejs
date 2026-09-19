@@ -1,0 +1,19 @@
+<%- include('_head', { title: 'Blog', page: 'blog' }) %>
+<h1>Blog</h1>
+
+<p class="tags">filter by tag:
+<% if (currentTag) { %><a href="<%= L('/blog') %>">all</a><% } else { %><b>all</b><% } %>
+<% allTags.forEach(function (tag) { %><span class="sep"> &middot; </span><% if (currentTag === tag) { %><b>#<%= tag %></b><% } else { %><a href="<%= L('/blog?tag=' + encodeURIComponent(tag)) %>">#<%= tag %></a><% } %><% }); %>
+</p>
+
+<% if (!posts.length) { %>
+<p>No posts found.</p>
+<% } %>
+<% posts.forEach(function (post) { %>
+<div class="entry">
+<h2><a href="<%= L('/blog/' + post.id) %>"><%= post.title %></a></h2>
+<p class="meta"><%= new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %><% if (post.tags && post.tags.length) { %> &middot; <%= post.tags.map(function (t) { return '#' + t; }).join(' ') %><% } %></p>
+<p><%= post.excerpt %></p>
+</div>
+<% }); %>
+<%- include('_foot') %>

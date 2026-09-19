@@ -1,0 +1,3 @@
+<%- include('layout', { body: `
+  <pre class="kb-file" aria-label="keybindings.json">${lines.map(line => `<span class="kb-line">${line.map(([type, text]) => `<span class="tok-${type}"${type === 'string' || type === 'comment' ? '' : ' data-no-edit'}>${text.replace(/&/g, '&amp;').replace(/</g, '&lt;')}</span>`).join('')}</span>`).join('')}</pre>
+` }) %>

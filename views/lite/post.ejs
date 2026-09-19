@@ -1,0 +1,8 @@
+<%- include('_head', { title: post.title, page: 'blog' }) %>
+<h1><%= post.title %></h1>
+<p class="meta"><%= new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %><% if (post.tags && post.tags.length) { %> &middot; <%= post.tags.map(function (t) { return '#' + t; }).join(' ') %><% } %></p>
+
+<%- post.content %>
+
+<p><a href="<%= L('/blog') %>">&larr; back to the blog</a></p>
+<%- include('_foot') %>

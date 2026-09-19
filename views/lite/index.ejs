@@ -1,0 +1,19 @@
+<%- include('_head', { title: null, page: 'home' }) %>
+<% if (site.photo) { %><img class="portrait" src="<%= site.photo %>" alt="<%= site.name %>" width="150"><% } %>
+<h1><%= site.greeting %></h1>
+<p class="lead"><%= site.tagline %></p>
+<p class="links">
+<% site.heroLinks.forEach(function (l, i) { %><% if (i) { %><span class="sep"> &middot; </span><% } %><a href="<%= L(l.url) %>"><%= l.label %></a><% }); %>
+<br>
+<% site.social.forEach(function (s, i) { %><% if (i) { %><span class="sep"> &middot; </span><% } %><a href="<%= s.url %>"<%- s.external ? ' rel="noopener"' : '' %>><%= s.label %></a><% }); %><% if (site.email) { %><span class="sep"> &middot; </span><a href="mailto:<%= site.email %>"><%= site.email %></a><% } %>
+</p>
+<div class="clear"></div>
+
+<h1>Projects</h1>
+<% (typeof projects !== 'undefined' && projects ? projects : []).forEach(function (p) { %>
+<div class="entry">
+<h2><a href="<%= p.external ? p.url : L(p.url) %>"<%- p.external ? ' rel="noopener"' : '' %>><%= p.title %></a></h2>
+<p><%- p.description %></p>
+</div>
+<% }); %>
+<%- include('_foot') %>

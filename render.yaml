@@ -1,0 +1,13 @@
+# Render blueprint — https://render.com/docs/blueprint-spec
+# ADMIN_PASSWORD is deliberately absent: set it in the dashboard if you want the
+# admin panel, and leave it unset to keep /admin closed.
+services:
+  - type: web
+    name: editor-portfolio
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production

@@ -1,0 +1,104 @@
+<%- include('../layout', { body: `
+  <section class="content admin">
+    <header class="admin-header">
+      <h1>// Admin Panel</h1>
+      <a href="/admin/logout" class="btn btn-small btn-outline">logout()</a>
+    </header>
+
+    <p class="lead">These forms write to the JSON files in <code>content/</code>. On a host with
+    an ephemeral filesystem (Render, Fly, Heroku) the edits vanish on the next deploy — see the
+    README. Editing the files in git and pushing is the durable path.</p>
+
+    <div class="admin-section">
+      <h2>about.json</h2>
+      <form method="POST" action="/admin/about" class="admin-form">
+        <label for="about-title">title:</label>
+        <input type="text" id="about-title" name="title" value="${about.title}" required>
+
+        <label for="about-bio">bio:</label>
+        <textarea id="about-bio" name="bio" rows="3" required>${about.bio}</textarea>
+
+        <label for="about-skills">skills: (comma-separated)</label>
+        <input type="text" id="about-skills" name="skills" value="${about.skills.join(', ')}" required>
+
+        <label for="about-background">background: (one paragraph per line)</label>
+        <textarea id="about-background" name="background" rows="4" required>${about.background}</textarea>
+
+        <button type="submit" class="btn btn-small">save()</button>
+      </form>
+    </div>
+
+    <div class="admin-section">
+      <h2>contact.json</h2>
+      <form method="POST" action="/admin/contact" class="admin-form">
+        <label for="contact-email">email:</label>
+        <input type="email" id="contact-email" name="email" value="${contact.email}" required>
+
+        <label for="contact-github">github:</label>
+        <input type="url" id="contact-github" name="github" value="${contact.social.github || ''}">
+
+        <label for="contact-linkedin">linkedin:</label>
+        <input type="url" id="contact-linkedin" name="linkedin" value="${contact.social.linkedin || ''}">
+
+        <label for="contact-twitter">twitter:</label>
+        <input type="url" id="contact-twitter" name="twitter" value="${contact.social.twitter || ''}">
+
+        <label for="contact-message">message:</label>
+        <textarea id="contact-message" name="message" rows="3" required>${contact.message}</textarea>
+
+        <button type="submit" class="btn btn-small">save()</button>
+      </form>
+    </div>
+
+    <div class="admin-section">
+      <h2>blog.json</h2>
+
+      <h3>// new Post()</h3>
+      <form method="POST" action="/admin/blog/new" class="admin-form">
+        <label for="new-title">title:</label>
+        <input type="text" id="new-title" name="title" required>
+
+        <label for="new-slug">slug: (the URL; optional)</label>
+        <input type="text" id="new-slug" name="slug" placeholder="left blank, it's made from the title">
+
+        <label for="new-tags">tags: (comma-separated)</label>
+        <input type="text" id="new-tags" name="tags">
+
+        <label for="new-excerpt">excerpt:</label>
+        <textarea id="new-excerpt" name="excerpt" rows="2" required></textarea>
+
+        <label for="new-content">content: (HTML)</label>
+        <textarea id="new-content" name="content" rows="6" required></textarea>
+
+        <button type="submit" class="btn btn-small">push()</button>
+      </form>
+
+      <h3>// posts.map()</h3>
+      ${posts.length === 0 ? '<p>// No posts yet.</p>' : posts.map(post => `
+        <div class="admin-post">
+          <h4>"${post.title}" <span class="post-date">// ${post.date}</span></h4>
+          <form method="POST" action="/admin/blog/edit/${post.id}" class="admin-form">
+            <label>title:</label>
+            <input type="text" name="title" value="${post.title}" required>
+
+            <label>tags:</label>
+            <input type="text" name="tags" value="${(post.tags || []).join(', ')}">
+
+            <label>excerpt:</label>
+            <textarea name="excerpt" rows="2" required>${post.excerpt}</textarea>
+
+            <label>content:</label>
+            <textarea name="content" rows="4" required>${post.content}</textarea>
+
+            <div class="btn-group">
+              <button type="submit" class="btn btn-small">update()</button>
+            </div>
+          </form>
+          <form method="POST" action="/admin/blog/delete/${post.id}" class="delete-form">
+            <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Delete this post?')">delete()</button>
+          </form>
+        </div>
+      `).join('')}
+    </div>
+  </section>
+` }) %>

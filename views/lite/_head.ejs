@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title><%= typeof title !== 'undefined' && title ? title + ' - ' + site.name : site.name %></title>
+<link rel="stylesheet" href="/css/dillo.css">
+</head>
+<body>
+<div class="masthead">
+<a class="sitename" href="<%= L('/') %>"><%= site.name %></a><br>
+<span class="tagline"><%= site.role %> &middot; <%= site.location %></span>
+</div>
+<%
+  // The nav mirrors the explorer in content/site.json, minus anything external.
+  const navItems = (site.explorer || [])
+    .flatMap((folder) => folder.files || [])
+    .filter((file) => !file.external);
+  const here = typeof page !== 'undefined' ? page : null;
+%><p class="nav"><% navItems.forEach(function (item, i) { %><% if (i) { %><span class="sep"> &middot; </span><% } %><% if (here === item.page) { %><b><%= item.label %></b><% } else { %><a href="<%= L(item.url) %>"><%= item.label %></a><% } %><% }); %></p>
+<hr>

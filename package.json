@@ -1,0 +1,24 @@
+{
+  "name": "editor-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A portfolio site that looks like a code editor. Express + EJS, content in JSON, with a no-JavaScript twin.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "happy-dom": "^20.11.2"
+  },
+  "license": "MIT"
+}

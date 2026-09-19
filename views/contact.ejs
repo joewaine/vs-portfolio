@@ -1,0 +1,20 @@
+<%- include('layout', { body: `
+  <section class="content">
+    <h1>{ "contact": {...} }</h1>
+    <p class="lead">${contact.message}</p>
+
+    <div class="contact-info">
+      <h2>"email":</h2>
+      <p><a href="mailto:${contact.email}">"${contact.email}"</a></p>
+
+      <h2>"social":</h2>
+      <ul class="social-links">
+        ${contact.social.github ? `<li><a href="${contact.social.github}" target="_blank" rel="noopener">GitHub</a></li>` : ''}
+        ${contact.social.linkedin ? `<li><a href="${contact.social.linkedin}" target="_blank" rel="noopener">LinkedIn</a></li>` : ''}
+        ${contact.social.twitter ? `<li><a href="${contact.social.twitter}" target="_blank" rel="noopener">X/Twitter</a></li>` : ''}
+        ${contact.social.youtube ? `<li><a href="${contact.social.youtube}" target="_blank" rel="noopener">YouTube</a></li>` : ''}
+        ${contact.social.bandcamp ? `<li><a href="${contact.social.bandcamp}" target="_blank" rel="noopener">Bandcamp</a></li>` : ''}
+      </ul>
+    </div>
+  </section>
+` }) %>

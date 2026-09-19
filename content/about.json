@@ -1,0 +1,6 @@
+{
+  "title": "About",
+  "bio": "One sentence about who you are and what you make.",
+  "skills": ["JavaScript", "CSS", "Node.js", "Design systems", "Typography"],
+  "background": "A paragraph about where you've worked and what you care about.\nA second paragraph — split them with a newline and both the JavaScript and the plain-HTML page will render them as separate paragraphs.\nDelete all of this and write your own."
+}

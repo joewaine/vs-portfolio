@@ -1,0 +1,97 @@
+{
+  "name": "Ada Lovelace",
+  "role": "design engineer",
+  "location": "London",
+  "titlebar": "ada lovelace | design engineer",
+  "greeting": "Hi, I'm Ada Lovelace",
+  "tagline": "Design engineer in London.",
+  "photo": "/img/avatar.svg",
+  "email": "you@example.com",
+  "repoFolder": "ada-lovelace-site",
+  "statusbar": {
+    "branch": "main",
+    "encoding": "UTF-8",
+    "language": "JavaScript"
+  },
+  "social": [
+    {
+      "label": "github",
+      "url": "https://github.com/",
+      "external": true
+    },
+    {
+      "label": "linkedin",
+      "url": "https://www.linkedin.com/",
+      "external": true
+    }
+  ],
+  "heroLinks": [
+    {
+      "label": "./about.md",
+      "url": "/about"
+    },
+    {
+      "label": "./blog.json",
+      "url": "/blog",
+      "outline": true
+    },
+    {
+      "label": "./contact.json",
+      "url": "/contact",
+      "outline": true
+    }
+  ],
+  "explorer": [
+    {
+      "folder": "ada-lovelace-site",
+      "open": true,
+      "files": [
+        {
+          "label": "index.js",
+          "icon": "js",
+          "url": "/",
+          "page": "home"
+        },
+        {
+          "label": "about.md",
+          "icon": "md",
+          "url": "/about",
+          "page": "about"
+        },
+        {
+          "label": "blog.json",
+          "icon": "json",
+          "url": "/blog",
+          "page": "blog"
+        },
+        {
+          "label": "contact.json",
+          "icon": "json",
+          "url": "/contact",
+          "page": "contact"
+        }
+      ]
+    },
+    {
+      "folder": ".vscode",
+      "open": true,
+      "files": [
+        {
+          "label": "keybindings.json",
+          "icon": "json",
+          "url": "/keybindings",
+          "page": "keybindings",
+          "defaultClosed": true
+        }
+      ]
+    },
+    {
+      "folder": "node_modules",
+      "open": false
+    },
+    {
+      "folder": ".git",
+      "open": false
+    }
+  ]
+}

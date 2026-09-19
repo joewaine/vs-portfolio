@@ -1,0 +1,18 @@
+[
+  {
+    "id": "hello-world",
+    "title": "Hello world",
+    "date": "2026-01-15",
+    "excerpt": "The first post. Posts live in content/blog.json — edit the file, or use the admin panel at /admin.",
+    "tags": ["meta"],
+    "content": "<p>Post bodies are HTML. Write them by hand in <code>content/blog.json</code>, or sign in at <code>/admin</code> and use the form.</p><p>The <code>id</code> is the URL slug: this post is at <code>/blog/hello-world</code>.</p>"
+  },
+  {
+    "id": "second-post",
+    "title": "A second post, so the tag filter has something to do",
+    "date": "2026-01-02",
+    "excerpt": "Tags are a flat list of strings. The blog page builds its filter bar from whatever tags exist.",
+    "tags": ["meta", "notes"],
+    "content": "<p>Delete both of these and write your own.</p>"
+  }
+]

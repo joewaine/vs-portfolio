@@ -1,0 +1,11 @@
+<%- include('../layout', { body: `
+  <section class="content admin-login">
+    <h1>// Admin Login</h1>
+    ${error ? `<p class="error">Error: ${error}</p>` : ''}
+    <form method="POST" action="/admin/login" class="login-form">
+      <label for="password">password:</label>
+      <input type="password" id="password" name="password" required placeholder="Enter password...">
+      <button type="submit" class="btn">authenticate()</button>
+    </form>
+  </section>
+` }) %>

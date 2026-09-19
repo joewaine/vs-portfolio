@@ -1,0 +1,249 @@
+/* Plain stylesheet for the no-JavaScript version of the site (see dillo.js).
+ *
+ * Target: Dillo (dillo-browser.org), NetSurf, and anything else with a partial
+ * CSS 2.1 engine. Everything here is CSS 2.1 by design:
+ *   no custom properties, no flexbox/grid, no calc(), no rgba(), no @media,
+ *   no border-radius/box-shadow/transition/transform, no @font-face.
+ * Layout is normal flow plus one float. If a rule below is ignored the page
+ * still reads top to bottom — that is the whole point.
+ */
+
+body {
+  margin: 0 auto;
+  padding: 24px 22px 48px 22px;
+  max-width: 42em;
+  background-color: #ffffff;
+  color: #1c1c1c;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+a { color: #0a53a8; }
+a:visited { color: #6b3fa0; }
+
+hr {
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #cccccc;
+  margin: 18px 0 18px 0;
+}
+
+/* ---- masthead + nav ---- */
+
+.masthead { margin-bottom: 10px; }
+
+.masthead .sitename {
+  font-family: monospace;
+  font-size: 22px;
+  font-weight: bold;
+  color: #1c1c1c;
+  text-decoration: none;
+}
+
+.masthead .tagline {
+  font-family: monospace;
+  font-size: 13px;
+  color: #555555;
+}
+
+.nav {
+  font-family: monospace;
+  font-size: 14px;
+  margin: 0 0 4px 0;
+  line-height: 1.9;
+}
+
+.nav a { text-decoration: none; }
+.nav b { color: #1c1c1c; }
+.nav .sep { color: #aaaaaa; }
+
+/* ---- text ---- */
+
+h1 {
+  font-family: monospace;
+  font-size: 21px;
+  font-weight: bold;
+  margin: 22px 0 6px 0;
+}
+
+h2 {
+  font-family: monospace;
+  font-size: 17px;
+  font-weight: bold;
+  margin: 26px 0 4px 0;
+}
+
+h3 {
+  font-family: monospace;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 20px 0 4px 0;
+}
+
+p { margin: 10px 0 10px 0; }
+
+.lead { font-size: 17px; }
+
+.meta {
+  font-family: monospace;
+  font-size: 13px;
+  color: #555555;
+}
+
+ul, ol { margin: 10px 0 10px 0; padding-left: 26px; }
+li { margin: 4px 0 4px 0; }
+
+code, pre {
+  font-family: monospace;
+  font-size: 14px;
+  background-color: #f2f2f2;
+}
+
+pre {
+  padding: 10px 12px;
+  border: 1px solid #dddddd;
+  overflow: auto;
+}
+
+blockquote {
+  margin: 12px 0 12px 0;
+  padding-left: 14px;
+  border-left: 3px solid #dddddd;
+  color: #444444;
+}
+
+img { border: 0; }
+
+/* ---- home ---- */
+
+.portrait {
+  float: left;
+  margin: 4px 16px 8px 0;
+  border: 1px solid #dddddd;
+}
+
+.clear { clear: both; }
+
+.links {
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* ---- lists of things (projects, posts) ---- */
+
+.entry {
+  margin: 0 0 22px 0;
+  padding: 0 0 2px 0;
+}
+
+.entry h2 { margin-top: 18px; }
+
+.tags {
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.tags a { text-decoration: none; }
+
+/* ---- skills / inline chips, without flexbox ---- */
+
+.inline-list { margin: 8px 0 8px 0; padding: 0; list-style: none; }
+.inline-list li {
+  display: inline;
+  font-family: monospace;
+  font-size: 13px;
+  white-space: nowrap;
+  background-color: #f2f2f2;
+  border: 1px solid #dddddd;
+  padding: 1px 5px 1px 5px;
+  margin-right: 3px;
+  line-height: 2.1;
+}
+
+/* ---- drawings ---- */
+
+.drawing {
+  margin: 0 0 26px 0;
+}
+
+.drawing img {
+  border: 1px solid #dddddd;
+}
+
+/* ---- forms ---- */
+
+form { margin: 16px 0 16px 0; }
+
+form p { margin: 12px 0 12px 0; }
+
+label {
+  display: block;
+  font-family: monospace;
+  font-size: 13px;
+  color: #555555;
+  margin-bottom: 3px;
+}
+
+input {
+  font-family: monospace;
+  font-size: 15px;
+  padding: 5px 7px 5px 7px;
+  border: 1px solid #999999;
+  width: 22em;
+}
+
+button, input[type="submit"] {
+  font-family: monospace;
+  font-size: 15px;
+  padding: 7px 14px 7px 14px;
+  border: 1px solid #0a53a8;
+  background-color: #0a53a8;
+  color: #ffffff;
+  width: auto;
+}
+
+.fine {
+  font-size: 13px;
+  color: #555555;
+}
+
+.notice {
+  margin: 18px 0 18px 0;
+  padding: 12px 14px 12px 14px;
+  border: 1px solid #cccccc;
+  border-left: 4px solid #0a53a8;
+  background-color: #f7f7f7;
+}
+
+.notice-bad { border-left-color: #b3261e; }
+
+/* ---- status steps ---- */
+
+.steps { list-style: none; padding-left: 0; }
+
+.steps li {
+  padding: 7px 0 7px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.mark {
+  font-family: monospace;
+  font-weight: bold;
+  color: #555555;
+}
+
+.mark-done { color: #1a7f37; }
+.mark-failed { color: #b3261e; }
+
+/* ---- footer ---- */
+
+.foot {
+  font-family: monospace;
+  font-size: 13px;
+  color: #555555;
+  line-height: 1.8;
+}
+
+.foot a { color: #0a53a8; }

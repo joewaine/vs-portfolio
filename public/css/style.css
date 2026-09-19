@@ -1,0 +1,1728 @@
+/* VS Code Theme */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f3f3;
+  --bg-tertiary: #ececec;
+  --bg-hover: #e8e8e8;
+  --bg-active: #d6d6d6;
+  --bg-tab: #ffffff;
+  --bg-tab-active: #ffffff;
+  --bg-tab-inactive: #ececec;
+  --border-color: #e5e5e5;
+  --text-primary: #333333;
+  --text-secondary: #616161;
+  --text-bright: #000000;
+  --accent: #007acc;
+  --accent-hover: #1c97ea;
+  --accent-subtle: rgba(0, 122, 204, 0.1);
+  --sidebar-width: 220px;
+  --titlebar-height: 35px;
+  --tabs-height: 35px;
+  --font-ui: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, Ubuntu, 'Droid Sans', sans-serif;
+  --font-mono: 'SF Mono', Monaco, Menlo, Consolas, 'Ubuntu Mono', 'Liberation Mono', 'DejaVu Sans Mono', 'Courier New', monospace;
+
+  /* Animation tokens */
+  --transition-fast: 120ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 300ms ease-out;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  line-height: 1.4;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+/* Focus states for accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Title Bar */
+.titlebar {
+  height: var(--titlebar-height);
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  -webkit-app-region: drag;
+}
+
+.titlebar-icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+.titlebar-title {
+  flex: 1;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.titlebar-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.titlebar-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.titlebar-btn.close { background: #ff5f57; border: 1px solid #e0443e; }
+.titlebar-btn.minimize { background: #ffbd2e; border: 1px solid #dea123; }
+.titlebar-btn.maximize { background: #28c840; border: 1px solid #1aab29; }
+
+/* Tabs Bar */
+.tabs-bar {
+  height: var(--tabs-height);
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--border-color);
+  overflow-x: auto;
+  /* Still scrollable (trackpad / drag), but never show the bar itself — a
+     dragged tab's transform widens the scroll area and would flash it in. */
+  scrollbar-width: none;
+}
+
+.tabs-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  height: calc(var(--tabs-height) - 1px);
+  padding: 0 14px;
+  background: var(--bg-tab-inactive);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.tab:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.tab.active {
+  background: var(--bg-tab-active);
+  color: var(--text-bright);
+  /* Inset shadow rather than a border so the stroke can't be clipped by the
+     bar's overflow and doesn't change the tab's box height. */
+  box-shadow: inset 0 3px 0 0 var(--accent);
+}
+
+.tab-icon {
+  font-size: 14px;
+}
+
+.tab-close {
+  opacity: 0.5;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.tab:hover .tab-close {
+  opacity: 0.8;
+}
+
+/* Main Container */
+.main-container {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Activity Bar */
+.activity-bar {
+  width: 48px;
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.activity-item {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.activity-item:hover {
+  color: var(--text-bright);
+  text-decoration: none;
+}
+
+.activity-item.active {
+  color: var(--text-bright);
+}
+
+.activity-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+}
+
+.activity-item::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background: var(--accent-subtle);
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.activity-item:hover::after {
+  opacity: 1;
+}
+
+.activity-icon {
+  font-size: 24px;
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.sidebar-header {
+  padding: 10px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.folder {
+  user-select: none;
+}
+
+.folder-header {
+  display: flex;
+  align-items: center;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.folder-header:hover {
+  background: var(--bg-hover);
+}
+
+.folder-icon {
+  margin-right: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.folder-name {
+  font-weight: 600;
+}
+
+.folder.collapsed .file-list {
+  display: none;
+}
+
+.folder-header:focus-visible {
+  outline: 1px solid var(--text-secondary);
+  outline-offset: -1px;
+}
+
+.file-list {
+  list-style: none;
+}
+
+.file-item {
+  display: block;
+  padding: 4px 12px 4px 28px;
+  font-size: 13px;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.file-item:hover {
+  background: var(--bg-hover);
+  text-decoration: none;
+}
+
+.file-item.active {
+  background: var(--bg-active);
+  color: var(--text-bright);
+}
+
+.file-icon {
+  margin-right: 6px;
+  font-size: 14px;
+}
+
+.file-icon.js { color: #b8a500; }
+.file-icon.json { color: #b8a500; }
+.file-icon.md { color: #519aba; }
+.file-icon.html { color: #e34c26; }
+.file-icon.py { color: #3572a5; }
+
+/* Editor Area */
+.editor-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.editor-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 40px;
+}
+
+/* Content entrance animation */
+.editor-content > .content,
+.editor-content > article {
+  animation: fadeInUp var(--transition-slow) both;
+}
+
+/* Content Styles */
+.content h1 {
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--text-bright);
+  margin-bottom: 20px;
+  font-family: var(--font-ui);
+  letter-spacing: -0.02em;
+}
+
+.content h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-top: 32px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.content p {
+  margin-bottom: 16px;
+  line-height: 1.7;
+  max-width: 65ch;
+}
+
+.content .lead {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+/* Code Block Style for Hero */
+.hero {
+  padding: 60px 0 40px;
+  animation: fadeInUp var(--transition-slow) both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero h1 {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.hero h1::before {
+  content: '// ';
+  color: #008000;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: #008000;
+  margin-bottom: 32px;
+  line-height: 1.7;
+  max-width: 55ch;
+}
+
+.hero-subtitle::before {
+  content: '/* ';
+}
+
+.hero-subtitle::after {
+  content: ' */';
+}
+
+.hero-intro {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.hero-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.hero-text h1 {
+  margin-bottom: 12px;
+}
+
+.hero-text .hero-subtitle {
+  margin-bottom: 0;
+}
+
+.hero-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero-social {
+  margin-top: 16px;
+  display: flex;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.hero-social a {
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.hero-social a:hover {
+  color: var(--accent);
+}
+
+.projects-section {
+  margin-top: 20px;
+}
+
+.projects-section h2 {
+  margin-top: 0;
+}
+
+.project-link {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.project-link:hover {
+  color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+  color: #ffffff;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.2);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover {
+  background: var(--bg-hover);
+  color: var(--text-bright);
+  border-color: var(--text-secondary);
+  box-shadow: none;
+  transform: translateY(-1px);
+}
+
+.btn-small {
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.btn-danger {
+  background: #f14c4c;
+}
+
+.btn-danger:hover {
+  background: #d73a3a;
+  box-shadow: 0 4px 12px rgba(241, 76, 76, 0.2);
+}
+
+/* Skills as Tags */
+.skills-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skills-list li {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: #267f99;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.skills-list li:hover {
+  border-color: #267f99;
+  background: rgba(38, 127, 153, 0.08);
+}
+
+/* Blog Posts */
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.post-preview {
+  position: relative;
+  padding: 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.post-preview h2 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.post-preview:hover {
+  border-color: var(--text-secondary);
+  transform: translateX(4px);
+}
+
+.post-preview h2 {
+  margin: 0 0 8px 0;
+  padding: 0;
+  border: none;
+  font-size: 15px;
+}
+
+.post-preview h2 a {
+  color: #007acc;
+  transition: color var(--transition-fast);
+}
+
+.post-preview h2 a:hover {
+  color: #1c97ea;
+  text-decoration: none;
+}
+
+.post-preview time {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.post-preview p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Single Post */
+.post-header {
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.post-header h1 {
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.post-header time {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.post-content {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.post-content h2 {
+  font-size: 16px;
+  margin-top: 32px;
+}
+
+.post-content p {
+  margin-bottom: 16px;
+  max-width: 65ch;
+}
+
+.post-content code {
+  background: var(--bg-tertiary);
+  padding: 2px 6px;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  border-radius: 3px;
+}
+
+.post-content pre {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+
+.post-content pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Inline blog images */
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  display: block;
+  margin: 20px 0;
+}
+
+.post-content .blog-image-row {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.post-content .blog-image-row img {
+  flex: 1;
+  min-width: 200px;
+  max-width: calc(50% - 6px);
+  margin: 0;
+  object-fit: contain;
+  background: var(--bg-secondary);
+}
+
+.post-content .blog-image-full img {
+  max-width: 100%;
+}
+
+.post-content .blog-image-caption {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  margin-top: -12px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.post-footer {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Contact */
+.contact-info h2 {
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+.social-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* Admin */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.admin-section {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.admin-section h2 {
+  margin: 0 0 12px 0;
+  padding: 0;
+  border: none;
+  font-size: 14px;
+}
+
+.admin-section h3 {
+  font-size: 13px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-form label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.admin-form input,
+.admin-form textarea {
+  padding: 8px 10px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+.admin-form button {
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.admin-post {
+  margin: 12px 0;
+  padding: 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+}
+
+.admin-post h4 {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.post-date {
+  font-weight: normal;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.btn-group {
+  display: flex;
+  gap: 6px;
+}
+
+.delete-form {
+  display: inline;
+  margin-top: 8px;
+}
+
+/* Login */
+.admin-login {
+  max-width: 280px;
+  margin: 40px auto;
+  padding: 20px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-form label {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.login-form input {
+  padding: 10px 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+.error {
+  color: #f14c4c;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+/* Status Bar */
+.statusbar {
+  height: 22px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.statusbar-left, .statusbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.statusbar-right {
+  margin-left: auto;
+}
+
+.statusbar-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* link to the no-JavaScript version of the current page (see dillo.js) */
+.statusbar-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.statusbar-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bg-active);
+}
+
+/* Blog Filters */
+.blog-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+  align-items: center;
+}
+
+.filter-label {
+  color: #008000;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.tag-filter {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 4px 10px;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.tag-filter:hover {
+  color: var(--text-bright);
+  background: var(--bg-hover);
+  text-decoration: none;
+}
+
+.tag-filter.active {
+  color: #267f99;
+  border-color: #267f99;
+  background: rgba(38, 127, 153, 0.08);
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.post-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #a31515;
+  transition: color var(--transition-fast);
+}
+
+.post-tag:hover {
+  color: #c42b1c;
+  text-decoration: none;
+}
+
+/* "Edit this site" — the humor feature */
+.site-edit-btn {
+  position: fixed;
+  bottom: 34px;
+  right: 16px;
+  z-index: 1000;
+  padding: 7px 14px;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: background var(--transition-fast), color var(--transition-fast),
+              border-color var(--transition-fast), transform var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+.site-edit-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-bright);
+  border-color: var(--text-secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.site-edit-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.site-edit-btn--editing,
+.site-edit-btn--editing:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.25);
+}
+
+.site-edit-btn--reset,
+.site-edit-btn--reset:hover {
+  background: #f14c4c;
+  color: #ffffff;
+  border-color: #f14c4c;
+  box-shadow: 0 4px 12px rgba(241, 76, 76, 0.2);
+}
+
+.site-edit-btn--reset:hover {
+  background: #d73a3a;
+  border-color: #d73a3a;
+}
+
+.editable-unit {
+  border-radius: 2px;
+  transition: outline-color var(--transition-fast), background var(--transition-fast);
+}
+
+body.site-editing .editable-unit {
+  outline: 1px dashed transparent;
+  outline-offset: 2px;
+  cursor: text;
+}
+
+body.site-editing .editable-unit:hover {
+  outline-color: var(--accent);
+  background: var(--accent-subtle);
+}
+
+body.site-editing .editable-unit:focus {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+  background: var(--accent-subtle);
+}
+
+body.site-editing .editor-content a {
+  cursor: text;
+}
+
+body.site-editing .post-preview h2 a::after {
+  content: none;
+}
+
+body.site-editing .post-preview:hover {
+  transform: none;
+}
+
+/* "X" delete badge for grey boxes / profile photo in edit mode */
+.skills-list li {
+  position: relative;
+}
+
+.site-removable-wrap {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.site-remove-btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 2px solid var(--bg-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.site-remove-btn:hover {
+  background: var(--bg-active);
+  color: var(--text-bright);
+  transform: scale(1.15);
+}
+
+body.site-editing .site-removable:hover > .site-remove-btn {
+  display: inline-flex;
+}
+
+/* VS Code tab close — clickable on desktop, always visible */
+.tabs-bar .tab-close {
+  cursor: pointer;
+  padding: 0 2px;
+  border-radius: 3px;
+  transition: opacity var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+}
+
+.tabs-bar .tab-close:hover {
+  opacity: 1;
+  background: var(--bg-active);
+  color: var(--text-bright);
+}
+
+/* VS Code tab drag-to-reorder (public/js/edit.js). Siblings slide via FLIP;
+   the dragged tab follows the pointer with no transition. */
+.tabs-bar .tab {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.tabs-bar.tabs-reordering .tab {
+  transition: transform 150ms ease;
+}
+
+.tabs-bar.tabs-reordering,
+.tabs-bar.tabs-reordering .tab {
+  cursor: grabbing;
+}
+
+.tabs-bar .tab.dragging {
+  transition: none;
+  position: relative;
+  z-index: 2;
+  opacity: 0.92;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.tabs-bar .tab.active.dragging {
+  box-shadow: inset 0 3px 0 0 var(--accent), 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* ⌘B — View: Toggle Primary Side Bar (public/js/edit.js) */
+body.sidebar-hidden .sidebar {
+  display: none;
+}
+
+/* ⌘K chord hint in the status bar */
+.statusbar-chord {
+  opacity: 0.85;
+}
+
+/* Quick Open / command palette (⌘P, ⌘⇧P) */
+.quick-input {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+}
+
+.quick-input[hidden] {
+  display: none;
+}
+
+.quick-input-widget {
+  position: absolute;
+  top: calc(var(--titlebar-height) + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, calc(100vw - 32px));
+  padding: 6px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  font-family: var(--font-ui);
+  font-size: 13px;
+}
+
+.quick-input-box {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font: inherit;
+  outline: none;
+}
+
+.quick-input-list {
+  list-style: none;
+  margin: 6px 0 0;
+  max-height: min(50vh, 420px);
+  overflow-y: auto;
+}
+
+.quick-input-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  color: var(--text-primary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.quick-input-item.focused {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.quick-input-item .file-icon {
+  width: 1.8em;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.quick-input-item.focused .file-icon {
+  color: #ffffff;
+}
+
+.quick-input-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quick-input-hl {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.quick-input-item.focused .quick-input-hl {
+  color: #ffffff;
+}
+
+.quick-input-desc {
+  font-size: 12px;
+  opacity: 0.7;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quick-input-keys {
+  margin-left: auto;
+  padding-left: 12px;
+  font-size: 11px;
+}
+
+.quick-input-keys kbd,
+.vs-notification kbd {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  padding: 0 5px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.quick-input-empty {
+  padding: 6px 8px;
+  color: var(--text-secondary);
+}
+
+/* Notifications, bottom-right like VS Code; stacked above the edit button */
+.vs-notifications {
+  position: fixed;
+  right: 16px;
+  bottom: 76px;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(440px, calc(100vw - 32px));
+}
+
+.vs-notification {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 8px 10px;
+  padding: 10px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.vs-notification-icon {
+  color: var(--accent);
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.vs-notification-message {
+  line-height: 1.5;
+}
+
+.vs-notification-close {
+  align-self: start;
+  padding: 0 2px;
+  background: none;
+  border: 0;
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.vs-notification-close:hover {
+  color: var(--text-bright);
+}
+
+.vs-notification-actions {
+  grid-column: 2 / span 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.vs-notification-actions button {
+  padding: 4px 12px;
+  background: var(--accent);
+  color: #ffffff;
+  border: 0;
+  border-radius: 2px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.vs-notification-actions button:hover {
+  background: var(--accent-hover);
+}
+
+.vs-notification-actions button.secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.vs-notification-actions button.secondary:hover {
+  background: var(--bg-hover);
+}
+
+/* /keybindings — rendered as a JSONC file with a line-number gutter */
+.kb-file {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre;
+  overflow-x: auto;
+  counter-reset: line;
+  color: var(--text-primary);
+}
+
+.kb-line {
+  display: block;
+  counter-increment: line;
+}
+
+.kb-line::before {
+  content: counter(line);
+  display: inline-block;
+  width: 3ch;
+  margin-right: 2.5ch;
+  text-align: right;
+  color: var(--text-secondary);
+  opacity: 0.55;
+  user-select: none;
+}
+
+/* VS Code Light token colours */
+.tok-comment { color: #008000; }
+.tok-key { color: #0451a5; }
+.tok-string { color: #a31515; }
+.tok-punct { color: var(--text-primary); }
+
+/* Edit + save buttons share one fixed row bottom-right */
+.site-fab-row {
+  position: fixed;
+  bottom: 34px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-fab-row .site-edit-btn {
+  position: static;
+}
+
+.kb-save-btn[hidden] {
+  display: none;
+}
+
+.kb-save-btn:disabled,
+.kb-save-btn:disabled:hover {
+  opacity: 0.55;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.kb-reset-btn[hidden] {
+  display: none;
+}
+
+.kb-file .kb-other-platform {
+  opacity: 0.45;
+}
+
+/* Dirty editor: VS Code swaps the × for a dot */
+.tab.dirty .tab-close {
+  opacity: 1;
+  font-size: 10px;
+  color: var(--text-primary);
+}
+
+.statusbar-problems.has-problems {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 2px;
+  padding: 0 5px;
+}
+
+.vs-notification--error .vs-notification-icon { color: #f14c4c; }
+.vs-notification--warning .vs-notification-icon { color: #b89500; }
+
+.vs-notification-list {
+  margin: 6px 0 0 0;
+  padding-left: 18px;
+}
+
+.vs-notification-list li {
+  margin: 2px 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+/* Empty editor state shown when the current page's tab is closed */
+.editor-empty-state {
+  margin: auto;
+  padding: 40px 24px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-align: center;
+  opacity: 0.7;
+  user-select: none;
+}
+
+.editor-empty-state .editor-empty-comment {
+  color: #008000;
+}
+
+/* Quick Post Button */
+.quick-post-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 300;
+  box-shadow: 0 4px 16px rgba(0, 122, 204, 0.25);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  text-decoration: none;
+}
+
+.quick-post-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 122, 204, 0.3);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .activity-bar {
+    display: none;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .titlebar {
+    display: none;
+  }
+
+  /* Keep the VS Code status bar on mobile — just tighter, and clear of the
+     iOS home indicator. Ln/Col is the first thing dropped when space runs out. */
+  .statusbar {
+    height: auto;
+    min-height: 22px;
+    padding: 0 8px calc(env(safe-area-inset-bottom, 0px) / 2);
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+
+  .statusbar-left, .statusbar-right {
+    gap: 10px;
+  }
+
+  .statusbar-position {
+    display: none;
+  }
+
+  .tabs-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .tabs-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    padding: 0 12px;
+    font-size: 11px;
+    min-width: 0;
+    flex-shrink: 0;
+  }
+
+  .tab-close {
+    display: none;
+  }
+
+  .editor-content {
+    padding: 20px 16px;
+  }
+
+  .hero {
+    padding: 20px 0 20px;
+  }
+
+  .hero-intro {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .hero-photo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .hero-text h1::before {
+    content: none;
+  }
+
+  .hero h1 {
+    font-size: 18px;
+  }
+
+  .hero-subtitle {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .hero-subtitle::before,
+  .hero-subtitle::after {
+    content: none;
+  }
+
+  .hero-links {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .hero-links .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-social {
+    justify-content: center;
+  }
+
+  .projects-section h2 {
+    text-align: center;
+  }
+
+  .content h1 {
+    font-size: 22px;
+  }
+
+  .content h2 {
+    font-size: 15px;
+  }
+
+  .post-preview {
+    padding: 14px;
+  }
+
+  .post-preview:hover {
+    transform: none;
+  }
+
+  .skills-list {
+    gap: 6px;
+  }
+
+  .skills-list li {
+    padding: 3px 10px;
+    font-size: 11px;
+  }
+
+  .post-content .blog-image-row img {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .blog-filters {
+    gap: 6px;
+  }
+
+  .quick-post-btn {
+    bottom: 32px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  .site-fab-row {
+    bottom: 14px;
+    right: 12px;
+  }
+
+  .site-edit-btn {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .editor-content {
+    padding: 16px 12px;
+  }
+
+  .hero h1 {
+    font-size: 16px;
+  }
+
+  .hero-subtitle {
+    font-size: 12px;
+  }
+
+  .hero-photo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .content h1 {
+    font-size: 20px;
+  }
+
+  .tab {
+    padding: 0 10px;
+    font-size: 10px;
+  }
+
+  /* Phone widths: branch + encoding + language still read as VS Code;
+     the problems counter is the next thing to go. */
+  .statusbar-left, .statusbar-right {
+    gap: 8px;
+  }
+
+  .statusbar-problems {
+    display: none;
+  }
+}
+

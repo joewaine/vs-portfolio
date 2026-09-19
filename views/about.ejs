@@ -1,0 +1,14 @@
+<%- include('layout', { body: `
+  <article class="content">
+    <h1># ${about.title}</h1>
+    <p class="lead">${about.bio}</p>
+
+    <h2>## Skills</h2>
+    <ul class="skills-list">
+      ${about.skills.map(skill => `<li>${skill}</li>`).join('')}
+    </ul>
+
+    <h2>## Background</h2>
+    <p>${String(about.background).split('\n').filter(p => p.trim()).join('</p><p>')}</p>
+  </article>
+` }) %>

@@ -1,0 +1,9 @@
+<hr>
+<p class="foot">
+This is the plain-HTML version of this site &mdash; no JavaScript, CSS 2.1 only,
+built to render in <a href="https://dillo-browser.org/">Dillo</a>.
+<br>
+<a href="<%= typeof fullUrl !== 'undefined' ? fullUrl : '/?lite=0' %>">Full version of this page</a><% site.social.forEach(function (s) { %><span class="sep"> &middot; </span><a href="<%= s.url %>"<%- s.external ? ' rel="noopener"' : '' %>><%= s.label %></a><% }); %><% if (site.email) { %><span class="sep"> &middot; </span><a href="mailto:<%= site.email %>"><%= site.email %></a><% } %>
+</p>
+</body>
+</html>

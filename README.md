@@ -7,22 +7,7 @@ for browsers that run no JavaScript.
 Live example: **[joewaine.com](https://joewaine.com)** — this is that site with
 the personal bits taken out.
 
-```
-┌───────────────────────────────────────────────────────┐
-│ ● ● ●            your name | what you do              │
-├───────────────────────────────────────────────────────┤
-│ ◆ index.js │ ◆ about.md │ ◆ blog.json │ ◆ contact.json│
-├────┬────────────────┬─────────────────────────────────┤
-│ ☰  │ EXPLORER       │                                 │
-│ ⌕  │ ▼ your-site    │   Hi, I'm Your Name             │
-│ ⎇  │   JS index.js  │   Design engineer in London.    │
-│ ⚙  │   M↓ about.md  │                                 │
-│    │   {} blog.json │   ## Projects                   │
-│    │ ▶ node_modules │   …                             │
-├────┴────────────────┴─────────────────────────────────┤
-│ ⎇ main  ↻ 0 ⚠ 0          plain version  UTF-8  JS     │
-└───────────────────────────────────────────────────────┘
-```
+![The home page: a title bar, a tab strip, an explorer sidebar and a status bar around an ordinary portfolio page](docs/screenshots/home.png)
 
 The chrome is not a static picture. Tabs close and reorder by dragging, the
 explorer folders collapse, `⌘P` opens a working Go-to-File palette, `⌘⇧P` opens
@@ -108,6 +93,8 @@ properties, a bit of JavaScript. `views/lite/*.ejs` is the same content in CSS
 User-Agent, for `?lite=1`, or for anyone who has clicked **plain version** in
 the status bar before. `?lite=0` opts back out.
 
+<img src="docs/screenshots/lite.png" alt="The same home page as plain HTML: a masthead, a row of text links, the portrait, and the project list" width="500">
+
 > **Adding a page? Add its `views/lite/` twin.** Without one it falls back to the
 > JavaScript-dependent template and renders as an unstyled pile.
 > `test/dillo.test.js` fails the build if you forget.
@@ -157,6 +144,8 @@ you want the panel, and `NODE_ENV=production` either way.
 and you can edit and save it in the browser — the bindings persist in your own
 localStorage. A few of the real VS Code chords are reserved by browsers; those
 are listed commented-out next to the `alt`-based binding that does work.
+
+![The keybindings page: a line-number gutter beside syntax-highlighted JSONC, with the browser-reserved chords commented out above their working fallbacks](docs/screenshots/keybindings.png)
 
 `keybindings.js` is the page, `public/js/edit.js` is what binds the keys, and
 `test/keybindings.test.js` fails if the two ever disagree.

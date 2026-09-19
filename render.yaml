@@ -3,7 +3,7 @@
 # admin panel, and leave it unset to keep /admin closed.
 services:
   - type: web
-    name: editor-portfolio
+    name: vs-portfolio
     runtime: node
     plan: free
     buildCommand: npm ci

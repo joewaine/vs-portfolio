@@ -1,4 +1,4 @@
-# editor-portfolio
+# vs-portfolio
 
 A portfolio site that looks like a code editor. Express + EJS, content in JSON
 files, and a second set of templates that render the same pages as plain HTML
@@ -35,7 +35,7 @@ anywhere.
 ## Quick start
 
 ```bash
-git clone https://github.com/joewaine/editor-portfolio my-site
+git clone https://github.com/joewaine/vs-portfolio my-site
 cd my-site
 npm install
 npm start          # http://localhost:3000
